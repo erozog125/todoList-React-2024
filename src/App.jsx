@@ -1,11 +1,12 @@
 import './App.css'
-import { NewTask } from './components/Newtask/NewTask'
+import { Home } from './components/Pages/Home/Home'
+
 
 function App() {
 
   return (
     <>
-      <NewTask />      
+      <Home />
     </>
   )
 }
