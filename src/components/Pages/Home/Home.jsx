@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Header } from '../../Layouts/Header/Header'
 import profile from '../../../images/profile.jpg'
 import { Main } from '../../Layouts/Main/Main'
 import { InfoTasks } from '../../Layouts/InfoTasks/InfoTasks'
-// import { NewTask } from '../../NewTask/NewTask'
+import { NewTask } from '../../NewTask/NewTask'
 import { FilterTasks } from '../../FilterTasks/FilterTasks'
 import { ContainerTasks } from '../../Layouts/ContainerTasks/ContainerTasks'
 import { ItemTask } from '../../ItemTask/ItemTask'
-
+import { tasksContext } from '../../Context/Context'
 
 export const Home = () => {
+
+  const otherContext = useContext(tasksContext)
+  
+ 
   return (
     <>      
       <Header>
@@ -21,26 +25,15 @@ export const Home = () => {
             <img className='img-profile' src={profile} alt="Imagen de perfil" />        
           </div>
         </div>
-      {/* <NewTask /> */}
-      <InfoTasks pendingTasks={4} y doneTasks={2} />
+      <NewTask />
+      <InfoTasks />
       </Header>      
       <Main>
         <FilterTasks />
         <ContainerTasks>
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
-          <ItemTask />
+          {
+            otherContext.tasks.map( (task,idx) => <ItemTask key={task+idx} titleTask={task.title} content={task.description} /> )
+          }
         </ContainerTasks>
       </Main>        
     </>

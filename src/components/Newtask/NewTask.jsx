@@ -1,18 +1,43 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { tasksContext } from "../Context/Context";
 import './NewTask.css'
 
 export const NewTask = () => {
+
+  const context = useContext(tasksContext)
+  
+  const [titleTask, setTitleTask] = useState('')
+  const [descriptionTask, setDescriptionTask] = useState('')
+  
+  const handleTitleTask = (event) => setTitleTask(event.target.value) 
+  const handleDescriptionTask = (event) => setDescriptionTask(event.target.value) 
+
+  useEffect(() => {
+    console.log('Soy el array Tasks' + context.tasks)
+  }, [context.tasks])
+  
+  const handleCreateTask = (event) => {    
+    event.preventDefault()
+     
+    const newTask = {
+      title: titleTask,
+      description: descriptionTask,
+      status: false
+    }          
+    context.setTasks([...context.tasks,newTask])
+  }  
+
   return (
     <form className='frm-task' action="">
-      <fieldset className='group-title-task'>
-        <label htmlFor="">Título de la tarea</label>
-        <input placeholder='Ej:Aseo ambiente' type="text" />
+      <fieldset name='txt-title' className='group-title-task'>
+        {/* <label htmlFor="">Título de la tarea</label> */}
+        <input onChange={handleTitleTask} id='txt-title' placeholder='Ej:Aseo ambiente' type="text" />
       </fieldset>
-      <fieldset className='group-description-task'>
-        <label htmlFor="">Descripción de la tarea</label>
-        <input placeholder='Ej: Realizar aseo del ambiente' type="text" maxLength={100} />
+      <fieldset name='txt-description' className='group-description-task'>
+        {/* <label htmlFor="">Descripción de la tarea</label> */}
+        <input onChange={handleDescriptionTask} id='txt-description' placeholder='Ej: Realizar aseo del ambiente' type="text" maxLength={100} />
       </fieldset>
-      <button className='btn-new-task'>Crear nueva Tarea</button>
+      <button onClick={handleCreateTask} className='btn-new-task'>Crear nueva Tarea</button>
     </form>
   )
 }

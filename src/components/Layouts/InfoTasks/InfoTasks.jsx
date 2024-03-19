@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useContext, useEffect, useState }  from 'react'
 import './infoTasks.css'
+import { tasksContext } from "../../Context/Context";
+export const InfoTasks = () => {
 
-export const InfoTasks = ({pendingTasks,doneTasks}) => {
+  const context = useContext(tasksContext)
+     
+  useEffect( () => {
+      context.tasks.forEach( element => {
+        !element.status 
+        ? context.setPendingTasks(context.pendingTasks+1)
+        : context.setDoneTasks(context.doneTasks+1)
+      })
+  } , [context.tasks] )
+  
   return(
     <>
-    <h2 className='info-tasks'>usted tiene {pendingTasks} pendientes y {doneTasks}  terminadas</h2>
+    <h2 className='info-tasks'>usted tiene <span className='task-pending'>{context.pendingTasks}</span> pendientes y <span className='task-done'>{context.doneTasks}</span> terminadas</h2>
     <hr />    
     </>
   )

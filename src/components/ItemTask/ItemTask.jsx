@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ItemTask.css'
 
-export const ItemTask = ({titleTask = 'Título de prueba: ',content = 'tarea de prueba'}) => {
+export const ItemTask = ({titleTask,content}) => {
+
+  const [isChecked, setIsChecked] = useState(false)
+
+  const handleCheckboxChange = () => setIsChecked(!isChecked)
+
   return (
-    <li className='item-task'>
-      <div className="circle-state"></div>
+    <li className={ isChecked ? 'item-task checked': 'item-task' }>
+      <div className={ isChecked ? 'circle-state circle-green': 'circle-state' }></div>
       <h2>{titleTask}</h2>
       <p>{content}</p>
-      <input type="checkbox" name="" id="" />
+      <input 
+        type="checkbox"
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+      />
     </li>
   )
 }

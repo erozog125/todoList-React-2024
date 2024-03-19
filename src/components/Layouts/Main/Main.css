@@ -1,4 +1,6 @@
 .main-container {
+  margin: 10rem;
+  padding: 6rem;
   width: 100vw;
   height: max-content;
   background-color: #340180;
