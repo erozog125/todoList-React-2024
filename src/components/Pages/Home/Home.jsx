@@ -11,9 +11,9 @@ import { tasksContext } from '../../Context/Context'
 
 export const Home = () => {
 
-  const otherContext = useContext(tasksContext)
+  const context = useContext(tasksContext)
   
- 
+  
   return (
     <>      
       <Header>
@@ -32,7 +32,14 @@ export const Home = () => {
         <FilterTasks />
         <ContainerTasks>
           {
-            otherContext.tasks.map( (task,idx) => <ItemTask key={task+idx} titleTask={task.title} content={task.description} /> )
+            context.tasks.map( (task,idx) => (
+              <ItemTask 
+                key={task+idx}
+                titleTask={task.title}
+                content={task.description}
+                idTask={task.id}
+              />
+            ))
           }
         </ContainerTasks>
       </Main>        

@@ -1,5 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import { tasksContext } from "../Context/Context";
+import { v4 as uuidv4 } from 'uuid';
 import './NewTask.css'
 
 export const NewTask = () => {
@@ -10,21 +11,20 @@ export const NewTask = () => {
   const [descriptionTask, setDescriptionTask] = useState('')
   
   const handleTitleTask = (event) => setTitleTask(event.target.value) 
-  const handleDescriptionTask = (event) => setDescriptionTask(event.target.value) 
-
-  useEffect(() => {
-    console.log('Soy el array Tasks' + context.tasks)
-  }, [context.tasks])
+  const handleDescriptionTask = (event) => setDescriptionTask(event.target.value)
   
+     
   const handleCreateTask = (event) => {    
     event.preventDefault()
      
     const newTask = {
+      id: uuidv4(),
       title: titleTask,
       description: descriptionTask,
       status: false
     }          
     context.setTasks([...context.tasks,newTask])
+    context.setPendingTasks(context.pendingTasks + 1)
   }  
 
   return (
