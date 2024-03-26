@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Header } from '../../Layouts/Header/Header'
 import profile from '../../../images/profile.jpg'
 import { Main } from '../../Layouts/Main/Main'
@@ -27,9 +27,9 @@ export const Home = () => {
         </div>
       <NewTask />
       <InfoTasks />
+      <FilterTasks />
       </Header>      
       <Main>
-        <FilterTasks />
         <ContainerTasks>
           {
             context.filteredTasks.map( (task,idx) => (
