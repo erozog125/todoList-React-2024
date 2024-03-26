@@ -1,9 +1,17 @@
 import React, { useContext, useEffect, useState }  from 'react'
 import './infoTasks.css'
 import { tasksContext } from "../../Context/Context";
+
 export const InfoTasks = () => {
 
-  const context = useContext(tasksContext)     
+  const context = useContext(tasksContext)
+  
+  useEffect(() => {
+    let pending = context.tasks.filter( task => task.status === false )
+    let resolve = context.tasks.filter( task => task.status === true )
+    context.setPendingTasks(pending.length)
+    context.setDoneTasks(resolve.length)
+  },[context.tasks])  
    
   return(
     <>

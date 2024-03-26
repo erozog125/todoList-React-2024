@@ -32,7 +32,7 @@ export const Home = () => {
         <FilterTasks />
         <ContainerTasks>
           {
-            context.tasks.map( (task,idx) => (
+            context.filteredTasks.map( (task,idx) => (
               <ItemTask 
                 key={task+idx}
                 titleTask={task.title}
